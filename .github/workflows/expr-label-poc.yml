@@ -1,0 +1,16 @@
+name: Expr Label POC
+on:
+  workflow_dispatch:
+    inputs:
+      RunnerLabel:
+        description: Runner label (expression-resolved at runtime)
+        required: false
+        default: ubuntu-latest
+
+jobs:
+  poc:
+    runs-on: ${{ inputs.RunnerLabel }}
+    steps:
+      - run: echo "job started, resolved runner label was '${{ inputs.RunnerLabel }}'"
+      - run: sleep 90
+      - run: echo "this step should never execute if the policy cancelled the run"
